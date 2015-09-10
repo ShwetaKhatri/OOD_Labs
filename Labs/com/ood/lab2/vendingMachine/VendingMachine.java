@@ -18,8 +18,7 @@ public class VendingMachine {
     private int selection;
 	private Scanner keyboardInput;
 	private static STATUS transactionStatus;
-	
-    
+	  
 	public VendingMachine() {
 		vendingMachineItems = new VendingMachineItems();
 		moneyBox = new MoneyBox();

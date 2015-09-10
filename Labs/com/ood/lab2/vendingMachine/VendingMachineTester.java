@@ -69,8 +69,7 @@ public class VendingMachineTester {
 		catch(Exception ex) {
 			System.out.println(ex);
 		}
-		
-	}
+		}
 	/**
 	 * @param args
 	 */
