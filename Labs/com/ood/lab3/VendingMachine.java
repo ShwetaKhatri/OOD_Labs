@@ -1,6 +1,5 @@
 package com.ood.lab3;
 
-import java.lang.management.MemoryNotificationInfo;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -36,11 +35,13 @@ public class VendingMachine {
 	private static final int RESTOCK_QUANTITY = 10;
     private static MoneyBox moneyBox;
     private static VendingMachineItem selectedItem;
+    private static float remainingBalance;
     private static final float MIN_SUFFICIENT_AMOUNT = 2.5f;
 	
 	public VendingMachine() {
 		items = new ArrayList<VendingMachineItem>();
 		moneyBox = new MoneyBox();
+		remainingBalance = 0.0f;
 		addItemsInVendingMachine();
 	}
 	
@@ -48,6 +49,9 @@ public class VendingMachine {
 	 * This method is responsible for displaying items in a vending machine
 	 */
 	public void listItems() {
+		if(items == null) {
+			return;
+		}
 		System.out.println("Items in vending machine are:");
 		int serialNo = 0;
 		for(VendingMachineItem item:items) {
@@ -111,8 +115,9 @@ public class VendingMachine {
 
 	private void quit() {
 		System.out.println("Transaction finished");		
-		float balance = moneyBox.getMoneyInMoneyBox() -  moneyBox.getCoinsAddedInThisSession();
-		System.out.println("Dispensing balance :" + balance );
+		remainingBalance = moneyBox.getCoinsAddedInThisSession() -  
+				selectedItem.itemPrice - remainingBalance;
+		System.out.println("Dispensing balance :" + remainingBalance + "$" );
 		System.exit(0);
 	}
 
@@ -168,6 +173,7 @@ public class VendingMachine {
 			selectItem(keyBoardInput);
 		}
 		if(moneyBox.getCoinsAddedInThisSession() < selectedItem.itemPrice) {
+			System.out.println("Insufficient funds");
 			status = STATUS.FAILED;
 			addCoins(keyBoardInput);
 		}
@@ -200,10 +206,8 @@ public class VendingMachine {
 			float remainingAmount = MIN_SUFFICIENT_AMOUNT - totalCoinsAddedInThisSession;
 			System.out.println("Insufficient amount.Please add " + remainingAmount + "$" );
 			addCoins(keyboardInput);	
-			status = STATUS.FAILED;
 		}
 		else if (totalCoinsAddedInThisSession >= MIN_SUFFICIENT_AMOUNT) {
-			 System.out.println("Please select an item");
 		     status = STATUS.SUCCESSFUL;
 		     return;
 		}
