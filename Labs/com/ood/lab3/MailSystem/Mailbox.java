@@ -1,4 +1,4 @@
-package com.ood.lab3.vendingMachine;
+package com.ood.lab3.MailSystem;
 /**
    A mailbox contains messages that can be listed, kept or discarded.
 */

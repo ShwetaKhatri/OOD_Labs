@@ -1,4 +1,4 @@
-package com.ood.lab3.vendingMachine;
+package com.ood.lab3.MailSystem;
 
 /*
    Connects a phone to the mail system. The purpose of this
@@ -55,7 +55,8 @@ public class Connection
    public void hangup()
    {
       if (state == RECORDING)
-         currentMailbox.addMessage(new Message(currentRecording));
+    	  system.addMessage(currentMailbox,new Message(currentRecording));
+        // currentMailbox.addMessage(new Message(currentRecording));
       resetConnection();
    }
 
@@ -79,11 +80,11 @@ public class Connection
    {
       if (key.equals("#"))
       {
-         currentMailbox = system.findMailbox(accumulatedKeys);
-         if (currentMailbox != null)
+    	 currentMailbox = system.findMailbox(accumulatedKeys);
+         if (system.findMailbox(accumulatedKeys)!= MailSystem.NO_SUCH_MAILBOX)
          {
             state = RECORDING;
-            phone.speak(currentMailbox.getGreeting());
+            phone.speak(system.getGreeting(currentMailbox));
          }
          else
             phone.speak("Incorrect mailbox number. Try again!");
@@ -100,9 +101,10 @@ public class Connection
    private void login(String key)
    {
       if (key.equals("#"))
-      {
-         if (currentMailbox.checkPasscode(accumulatedKeys))
-         {
+      {	  
+       //  if (currentMailbox.checkPasscode(accumulatedKeys))
+        if(system.checkPasscode(currentMailbox,accumulatedKeys))
+    	  {
             state = MAILBOX_MENU;
             phone.speak(MAILBOX_MENU_TEXT);
          }
@@ -122,7 +124,8 @@ public class Connection
    {
       if (key.equals("#"))
       {
-         currentMailbox.setPasscode(accumulatedKeys);
+    	 system.setPasscode(currentMailbox,accumulatedKeys);
+         //currentMailbox.setPasscode(accumulatedKeys);
          state = MAILBOX_MENU;
          phone.speak(MAILBOX_MENU_TEXT);
          accumulatedKeys = "";
@@ -139,7 +142,7 @@ public class Connection
    {
       if (key.equals("#"))
       {
-         currentMailbox.setGreeting(currentRecording);
+         system.setGreeting(currentMailbox,currentRecording);
          currentRecording = "";
          state = MAILBOX_MENU;
          phone.speak(MAILBOX_MENU_TEXT);
@@ -178,7 +181,7 @@ public class Connection
       if (key.equals("1"))
       {
          String output = "";
-         Message m = currentMailbox.getCurrentMessage();
+         Message m = system.getCurrentMessage(currentMailbox);
          if (m == null) output += "No messages." + "\n";
          else output += m.getText() + "\n";
          output += MESSAGE_MENU_TEXT;
@@ -186,12 +189,12 @@ public class Connection
       }
       else if (key.equals("2"))
       {
-         currentMailbox.saveCurrentMessage();
+         system.saveCurrentMessage(currentMailbox);
          phone.speak(MESSAGE_MENU_TEXT);
       }
       else if (key.equals("3"))
       {
-         currentMailbox.removeCurrentMessage();
+    	 system.removeCurrentMessage(currentMailbox);
          phone.speak(MESSAGE_MENU_TEXT);
       }
       else if (key.equals("4"))
@@ -202,7 +205,8 @@ public class Connection
    }
 
    private MailSystem system;
-   private Mailbox currentMailbox;
+   private int currentMailbox;
+   //private Mailbox currentMailbox;
    private String currentRecording;
    private String accumulatedKeys;
    private Telephone phone;

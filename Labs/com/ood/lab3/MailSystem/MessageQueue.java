@@ -1,4 +1,4 @@
-package com.ood.lab3.vendingMachine;
+package com.ood.lab3.MailSystem;
 import java.util.ArrayList;
 
 /**
