@@ -206,7 +206,6 @@ public class Connection
 
    private MailSystem system;
    private int currentMailbox;
-   //private Mailbox currentMailbox;
    private String currentRecording;
    private String accumulatedKeys;
    private Telephone phone;

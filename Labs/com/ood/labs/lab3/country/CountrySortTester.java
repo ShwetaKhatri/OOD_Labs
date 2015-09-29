@@ -12,7 +12,7 @@ public class CountrySortTester{
 		countries.add(new Country("Belgium", 30510));
 		countries.add(new Country("Germany", 514000));
 		//Collections.sort(countries);
-		Collections.sort(countries,Country.createComparatorByArea(false));
+		Collections.sort(countries,Country.createComparatorByName(true));
 		// Now the array list is sorted by area
 		for (Country c : countries)
 			System.out.println(c.getName() + " " + c.getArea());

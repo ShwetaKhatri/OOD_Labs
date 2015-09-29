@@ -49,7 +49,9 @@ public class Country implements Comparable<Country>{
 				if(increasing) {
 					return 1 * count1.getName().compareTo(count2.getName());				
 				}
-				return -1 * count1.getName().compareTo(count2.getName());	
+				else {
+					return -1 * count1.getName().compareTo(count2.getName());						
+				}
 			}			
 		};
 	}
