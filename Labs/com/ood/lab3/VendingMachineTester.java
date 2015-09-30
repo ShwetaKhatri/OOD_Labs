@@ -8,5 +8,4 @@ public class VendingMachineTester {
 		VendingMachineUI ui = new VendingMachineUI(machine);
 		ui.doMain();
 	}
-
 }
