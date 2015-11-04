@@ -1,5 +1,6 @@
 package com.ood.lab5.car;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
@@ -42,8 +43,9 @@ public class Car implements Drawable {
 		      g2.draw(body);
 		      g2.draw(frontTire);
 		      g2.draw(rearTire);
+		      g2.setColor(Color.red);
 		      g2.draw(frontWindshield);
 		      g2.draw(roofTop);
-		      g2.draw(rearWindshield);	   
+		      g2.draw(rearWindshield);	 
 	}
 }
