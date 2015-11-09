@@ -168,6 +168,4 @@ public class GraphView  extends JPanel implements Observer {
 
 	}
 
-
-
 }

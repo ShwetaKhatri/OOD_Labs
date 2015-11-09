@@ -49,11 +49,11 @@ public class NumberView extends Subject {
 	
 	public void drawFrame() {
 		JLabel instructions = new JLabel("Please enter co-ordinates in the table");
-		instructions.setFont(font);
-		frame.setSize(400, 400);
+		instructions.setFont(font);	
 		frame.setLayout(new BorderLayout());
 		frame.add(instructions,BorderLayout.NORTH);
 		frame.add(addTable(),BorderLayout.CENTER);
+		frame.setSize(800,800);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		
